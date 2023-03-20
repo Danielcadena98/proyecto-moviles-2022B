@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActualizarIngredienteActivity"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar tarea"
+        android:textColor="@color/purple_500"
+        android:textSize="31dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/carListRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la tarea:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tit_nombre_tarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre "
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción de la tarea:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tit_descripcion_tarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Tarea terminada?"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tit_terminada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sí/No"
+        android:textSize="16sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar tarea"
+        android:drawableLeft="@drawable/ic_edit"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/btn_guardar_tarea"/>
+</LinearLayout>

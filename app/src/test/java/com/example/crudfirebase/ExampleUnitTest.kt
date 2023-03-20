@@ -1,4 +1,4 @@
-package com.example.aplicacioncocina
+package com.example.crudfirebase
 
 import org.junit.Test
 

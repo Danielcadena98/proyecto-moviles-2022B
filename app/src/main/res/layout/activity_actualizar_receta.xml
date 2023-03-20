@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActualizarRecetaActivity"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Creación de receta"
+        android:textColor="@color/purple_500"
+        android:textSize="31dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recetaListRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la receta:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tit_nombre_receta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nombre" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preparación:"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/tit_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aquí la preparación" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear"
+        android:drawableLeft="@drawable/ic_new"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/btn_save"/>
+</LinearLayout>
