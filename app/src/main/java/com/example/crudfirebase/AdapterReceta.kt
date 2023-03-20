@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
@@ -31,6 +32,7 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
         holder.idReceta.text = currentItem.id
         holder.nombreReceta.text = currentItem.nombreReceta
         holder.descripcion.text = currentItem.preparacionReceta
+        holder.profileImage.setImageResource(currentItem.profileImageId)
         holder.btnEditar.setOnClickListener {
             abrirActividadConParametros(ActualizarRecetaActivity::class.java, currentItem, it)
         }
@@ -94,6 +96,7 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
         val btnVerTareas = itemView.findViewById<Button>(R.id.btn_ver_ingredientes)
         val idReceta = itemView.findViewById<TextView>(R.id.tvIdReceta)
         val descripcion = itemView.findViewById<TextView>(R.id.tv_preparacion)
+        val profileImage: ImageView = itemView.findViewById(R.id.profileImage)
     }
 
 
