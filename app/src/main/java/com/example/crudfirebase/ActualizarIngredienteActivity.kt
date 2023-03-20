@@ -14,40 +14,40 @@ class ActualizarIngredienteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_ingrediente)
-        var id = intent.getStringExtra("proeyctoId")
-        var tareaId = intent.getStringExtra("tareaId")
-        var nombre = intent.getStringExtra("tareaNombre")
-        var descripcion = intent.getStringExtra("tareaDescripcion")
-        var terminada = intent.getStringExtra("tareaTerminada")
+        var id = intent.getStringExtra("recetaId")
+        var ingredienteId = intent.getStringExtra("ingredienteId")
+        var nombre = intent.getStringExtra("ingredienteNombre")
+        var descripcion = intent.getStringExtra("ingredienteDescripcion")
+        var conseguido = intent.getStringExtra("ingredienteConseguido")
 
 
-        var textNombre = this.findViewById<EditText>(R.id.tit_nombre_tarea)
+        var textNombre = this.findViewById<EditText>(R.id.tit_nombre_ingrediente)
         textNombre.setText(nombre)
-        var textDescripcion= this.findViewById<EditText>(R.id.tit_descripcion_tarea)
-        textDescripcion.setText(descripcion.toString())
-        var textTerminada = this.findViewById<EditText>(R.id.tit_terminada)
-        textTerminada.setText(terminada)
+        var textPreparacion= this.findViewById<EditText>(R.id.tit_descripcion_ingrediente)
+        textPreparacion.setText(descripcion.toString())
+        var textConseguido = this.findViewById<EditText>(R.id.tit_conseguido)
+        textConseguido.setText(conseguido)
 
 
-        val btnGuardarEstudiante = this.findViewById<Button>(R.id.btn_guardar_tarea)
+        val btnGuardarEstudiante = this.findViewById<Button>(R.id.btn_guardar_ingrediente)
         btnGuardarEstudiante.setOnClickListener {
             if (!checkChange(
                     nombre,
                     descripcion,
-                    terminada,
+                    conseguido,
                     textNombre.text.toString(),
-                    textDescripcion.text.toString(),
-                    textTerminada.text.toString()
+                    textPreparacion.text.toString(),
+                    textConseguido.text.toString()
 
                 )
             ) {
 
                 saveData(
                     id!!,
-                    tareaId!!,
+                    ingredienteId!!,
                     textNombre.text.toString(),
-                    textDescripcion.text.toString(),
-                    textTerminada.text.toString(),
+                    textPreparacion.text.toString(),
+                    textConseguido.text.toString(),
                 )
             }
             abrirActividadConParametros(IngredienteListActivity::class.java, it, id!!)
@@ -59,34 +59,34 @@ class ActualizarIngredienteActivity : AppCompatActivity() {
 
     private fun saveData(
         id: String,
-        tareaId: String,
+        ingredienteId: String,
         textNombre: String,
-        textDescripcion: String,
-        textTerminada: String
+        textPreparacion: String,
+        textConseguido: String
     ) {
 
         val db = Firebase.firestore
-        val users = db.collection("proyecto")
-        val tareasCollectionsRef = users.document(id!!).collection("tarea")
-        val dataTarea = hashMapOf(
-            "id" to tareaId,
-            "tareaNombre" to textNombre,
-            "tareaDescripcion" to textDescripcion,
-            "tareaTerminada" to textTerminada
+        val users = db.collection("receta")
+        val ingredientesCollectionsRef = users.document(id!!).collection("ingrediente")
+        val dataIngrediente= hashMapOf(
+            "id" to ingredienteId,
+            "ingredienteNombre" to textNombre,
+            "ingredienteDescripcion" to textPreparacion,
+            "ingredienteConseguido" to textConseguido
         )
-        tareasCollectionsRef.document(tareaId).set(dataTarea)
+        ingredientesCollectionsRef.document(ingredienteId).set(dataIngrediente)
 
     }
 
     private fun checkChange(
         nombre: String?,
         descripcion: String?,
-        terminada: String?,
+        conseguido: String?,
         textNombre: String,
-        textDescripcion: String,
-        textTerminada: String
+        textPreparacion: String,
+        textConseguido: String
     ): Boolean {
-        return (nombre == textNombre && descripcion == textDescripcion && terminada == textTerminada)
+        return (nombre == textNombre && descripcion == textPreparacion && conseguido == textConseguido)
     }
 
     private val contenidoIntentExplicito = registerForActivityResult(
@@ -100,9 +100,9 @@ class ActualizarIngredienteActivity : AppCompatActivity() {
         }
     }
 
-    private fun abrirActividadConParametros(clase: Class<*>, it: View?, idColegio: String) {
+    private fun abrirActividadConParametros(clase: Class<*>, it: View?, idReceta: String) {
         val intent = Intent(it!!.context, clase)
-        intent.putExtra("colegioId", idColegio)
+        intent.putExtra("recetaId", idReceta)
         contenidoIntentExplicito.launch(intent)
     }
 

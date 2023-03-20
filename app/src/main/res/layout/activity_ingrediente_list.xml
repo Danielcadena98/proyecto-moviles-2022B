@@ -11,18 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Tareas del proyecto"
+        android:text="Ingredientes"
         android:textColor="@color/purple_500"
         android:textSize="31dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tareaListRecyclerView"
+        android:id="@+id/ingredienteListRecyclerView"
         android:layout_width="412dp"
         android:layout_height="537dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,14 +33,14 @@
         tools:listitem="@layout/ingrediente_item" />
 
     <Button
-        android:id="@+id/btn_nueva_tarea"
+        android:id="@+id/btn_nuevo_ingrediente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:text="Nueva tarea"
-        android:drawableLeft="@drawable/ic_new_task"
         android:backgroundTint="#A7D260"
+        android:drawableLeft="@drawable/ic_ingredient"
+        android:text="Nuevo ingrediente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

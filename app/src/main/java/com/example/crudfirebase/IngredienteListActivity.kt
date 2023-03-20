@@ -26,7 +26,7 @@ class IngredienteListActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var tareaListRecyclerView: RecyclerView
+    private lateinit var ingredienteListRecyclerView: RecyclerView
     private lateinit var ingredienteArrayList: ArrayList<Ingrediente>
     private lateinit var adapterIngrediente: AdapterIngrediente
 
@@ -35,37 +35,37 @@ class IngredienteListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingrediente_list)
 
-        var id = intent.getStringExtra("proyectoId")
+        var id = intent.getStringExtra("recetaId")
 
-        tareaListRecyclerView = findViewById(R.id.tareaListRecyclerView)
-        tareaListRecyclerView.layoutManager = LinearLayoutManager(this)
-        tareaListRecyclerView.setHasFixedSize(true)
+        ingredienteListRecyclerView = findViewById(R.id.ingredienteListRecyclerView)
+        ingredienteListRecyclerView.layoutManager = LinearLayoutManager(this)
+        ingredienteListRecyclerView.setHasFixedSize(true)
         ingredienteArrayList = arrayListOf<Ingrediente>()
         if (id != null) {
-            consultarDocumentosProyecto(id!!)
+            consultarDocumentosReceta(id!!)
         }
         adapterIngrediente = AdapterIngrediente(ingredienteArrayList, contenidoIntentExplicito, id!!)
-        tareaListRecyclerView.adapter = adapterIngrediente
+        ingredienteListRecyclerView.adapter = adapterIngrediente
 
-        val btnNuevaTarea = findViewById<Button>(R.id.btn_nueva_tarea)
-        btnNuevaTarea.setOnClickListener {
+        val btnNuevaIngrediente= findViewById<Button>(R.id.btn_nuevo_ingrediente)
+        btnNuevaIngrediente.setOnClickListener {
             abrirActividadConParametros(ActualizarIngredienteActivity::class.java, it, id!!)
         }
     }
 
-    private fun consultarDocumentosProyecto(id: String) {
+    private fun consultarDocumentosReceta(id: String) {
 
         val db = Firebase.firestore
-        val proyectoRef = db.collection("proyecto").document(id)
-        val tareaCollectionRef = proyectoRef.collection("tarea")
+        val recetaRef = db.collection("receta").document(id)
+        val ingredienteCollectionRef = recetaRef.collection("ingrediente")
         limpiarArreglo()
-        tareaCollectionRef.get().addOnSuccessListener { querySnaps ->
+        ingredienteCollectionRef.get().addOnSuccessListener { querySnaps ->
             for (document in querySnaps.documents) {
                 val ingrediente = Ingrediente(
                     document.get("id") as String?,
-                    document.get("tareaNombre") as String?,
-                    document.get("tareaDescripcion") as String?,
-                    document.get("tareaTerminada") as String?
+                    document.get("ingredienteNombre") as String?,
+                    document.get("ingredienteDescripcion") as String?,
+                    document.get("ingredienteConseguido") as String?
                 )
                     this.ingredienteArrayList.add(ingrediente)
 
@@ -80,9 +80,9 @@ class IngredienteListActivity : AppCompatActivity() {
         this.ingredienteArrayList.clear()
     }
 
-    private fun abrirActividadConParametros(clase: Class<*>, it: View?, idColegio: String) {
+    private fun abrirActividadConParametros(clase: Class<*>, it: View?, idReceta: String) {
         val intent = Intent(it!!.context, clase)
-        intent.putExtra("colegioId", idColegio)
+        intent.putExtra("recetaId", idReceta)
         contenidoIntentExplicito.launch(intent)
     }
 }

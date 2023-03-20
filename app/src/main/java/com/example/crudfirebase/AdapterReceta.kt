@@ -28,9 +28,9 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
 
     override fun onBindViewHolder(holder: MyViewHolderUser, position: Int) {
         val currentItem = recetaList[position]
-        holder.idProyecto.text = currentItem.id
-        holder.nombreProyecto.text = currentItem.nombreProyecto
-        holder.descripcion.text = currentItem.descripcionProyecto
+        holder.idReceta.text = currentItem.id
+        holder.nombreReceta.text = currentItem.nombreReceta
+        holder.descripcion.text = currentItem.preparacionReceta
         holder.btnEditar.setOnClickListener {
             abrirActividadConParametros(ActualizarRecetaActivity::class.java, currentItem, it)
         }
@@ -40,12 +40,12 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
 
             val builder = AlertDialog.Builder(it.context)
             builder.setTitle("Confirmar")
-            builder.setMessage("¿Deseas eliminar este proyecto?")
+            builder.setMessage("¿Deseas eliminar este receta?")
             builder.setPositiveButton("Si") { dialog, _ ->
                 // Delete the item
                 dialog.dismiss()
                 // Perform the deletion here
-                deleteProyecto(currentItem.id!!)
+                deleteReceta(currentItem.id!!)
                 this.recetaList.remove(currentItem)
                 notifyDataSetChanged()
             }
@@ -60,11 +60,11 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
         }
     }
 
-    private fun deleteProyecto(id: String) {
+    private fun deleteReceta(id: String) {
         val db = Firebase.firestore
-        val proyecto = db.collection("proyecto")
-        val proyectoDoc = proyecto.document(id)
-        proyectoDoc.delete().addOnSuccessListener {
+        val receta = db.collection("receta")
+        val recetaDoc = receta.document(id)
+        recetaDoc.delete().addOnSuccessListener {
 
         }.addOnFailureListener {
 
@@ -75,10 +75,9 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
 
     private fun abrirActividadConParametros(clase: Class<*>, receta: Receta, it: View?) {
         val intent = Intent(it!!.context, clase)
-        intent.putExtra("proyectoId", receta!!.id)
-        intent.putExtra("proyectoNombre", receta!!.nombreProyecto)
-        intent.putExtra("proyectoDescripcion", receta!!.descripcionProyecto)
-        intent.putExtra("fechaProyecto", receta!!.fechaProyecto)
+        intent.putExtra("recetaId", receta!!.id)
+        intent.putExtra("recetaNombre", receta!!.nombreReceta)
+        intent.putExtra("recetaPreparacion", receta!!.preparacionReceta)
         contenidoIntentExplicito.launch(intent)
     }
 
@@ -89,11 +88,11 @@ class AdapterReceta(var recetaList: ArrayList<Receta>, private val contenidoInte
     
 
     class MyViewHolderUser(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nombreProyecto = itemView.findViewById<TextView>(R.id.tv_nombre_receta)
+        val nombreReceta = itemView.findViewById<TextView>(R.id.tv_nombre_receta)
         val btnEditar = itemView.findViewById<Button>(R.id.btn_editar)
         val btnEliminar = itemView.findViewById<Button>(R.id.btn_eliminar)
         val btnVerTareas = itemView.findViewById<Button>(R.id.btn_ver_ingredientes)
-        val idProyecto = itemView.findViewById<TextView>(R.id.tvIdProyecto)
+        val idReceta = itemView.findViewById<TextView>(R.id.tvIdReceta)
         val descripcion = itemView.findViewById<TextView>(R.id.tv_preparacion)
     }
 

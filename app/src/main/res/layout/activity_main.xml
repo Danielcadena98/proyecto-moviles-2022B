@@ -11,7 +11,7 @@
         android:id="@+id/btn_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proyectos"
+        android:text="Recetas"
         android:drawableLeft="@drawable/ic_project"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

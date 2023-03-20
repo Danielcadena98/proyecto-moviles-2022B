@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar tarea"
+        android:text="Ingrediente"
         android:textColor="@color/purple_500"
         android:textSize="31dp"
         android:textStyle="bold"
@@ -26,11 +26,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre de la tarea:"
+        android:text="Nombre del ingrediente:"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/tit_nombre_tarea"
+        android:id="@+id/tit_nombre_ingrediente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nombre "
@@ -39,11 +39,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descripción de la tarea:"
+        android:text="Descripción del ingrediente:"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/tit_descripcion_tarea"
+        android:id="@+id/tit_descripcion_ingrediente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Descripción"
@@ -52,22 +52,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿Tarea terminada?"
+        android:text="¿Conseguido?"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/tit_terminada"
+        android:id="@+id/tit_conseguido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sí/No"
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/btn_guardar_ingrediente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar tarea"
-        android:drawableLeft="@drawable/ic_edit"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:id="@+id/btn_guardar_tarea"/>
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_ingredient"
+        android:text="Guardar ingrediente" />
 </LinearLayout>

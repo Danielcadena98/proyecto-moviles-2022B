@@ -63,15 +63,15 @@ class RecetaListActivity : AppCompatActivity() {
 
     private fun consultarDocumentos(){
         val db = Firebase.firestore
-        val proyectoRef = db.collection("proyecto")
+        val recetaRef = db.collection("receta")
         limpiarArreglo()
-        proyectoRef.get().addOnSuccessListener { result ->
+        recetaRef.get().addOnSuccessListener { result ->
             for (document in result) {
                 val receta = Receta(
                     document.get("id") as String?,
-                    document.get("nombreProyecto") as String?,
-                    document.get("descripcionProyecto") as String?,
-                    document.get("fechaProyecto") as String?
+                    document.get("nombreReceta") as String?,
+                    document.get("preparacionReceta") as String?,
+                    document.get("profileImageId") as Int
                 )
                 recetaArrayList.add(receta)
             }
@@ -79,7 +79,7 @@ class RecetaListActivity : AppCompatActivity() {
             adaptador.recetaList = recetaArrayList
             adaptador.notifyDataSetChanged()
         }.addOnFailureListener { exception ->
-            Log.d(null, "Error al obtener proyecto", exception)
+            Log.d(null, "Error al obtener receta", exception)
         }
     }
 

@@ -7,9 +7,9 @@ import androidx.annotation.RequiresApi
 
 data class Ingrediente(
     val id: String? = null,
-    var tareaNombre: String? = null,
-    var tareaDescripcion: String? = null,
-    var tareaTerminada: String? = ""
+    var ingredienteNombre: String? = null,
+    var ingredienteDescripcion: String? = null,
+    var ingredienteConseguido: String? = ""
 
 ):Parcelable {
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -27,9 +27,9 @@ data class Ingrediente(
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-        parcel.writeString(tareaNombre)
-        parcel.writeString(tareaDescripcion)
-        parcel.writeString(tareaTerminada)
+        parcel.writeString(ingredienteNombre)
+        parcel.writeString(ingredienteDescripcion)
+        parcel.writeString(ingredienteConseguido)
     }
     companion object CREATOR : Parcelable.Creator<Ingrediente> {
         @RequiresApi(Build.VERSION_CODES.Q)

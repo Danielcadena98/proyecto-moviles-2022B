@@ -42,7 +42,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/tit_fecha"
+        android:id="@+id/tit_preparacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="aquí la preparación" />

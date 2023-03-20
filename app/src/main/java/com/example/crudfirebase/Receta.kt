@@ -7,16 +7,16 @@ import androidx.annotation.RequiresApi
 
 data class Receta(
     val id: String?=null,
-    var nombreProyecto: String? = null,
-    var descripcionProyecto: String? = null,
-    var fechaProyecto: String? = null,
+    var nombreReceta: String? = null,
+    var preparacionReceta: String? = null,
+    var profileImageId: Int
     ): Parcelable{
     @RequiresApi(Build.VERSION_CODES.Q)
     constructor(parcel: Parcel): this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readInt()
     )
 
     override fun describeContents(): Int {
@@ -26,9 +26,9 @@ data class Receta(
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-        parcel.writeString(nombreProyecto)
-        parcel.writeString(descripcionProyecto)
-        parcel.writeString(fechaProyecto)
+        parcel.writeString(nombreReceta)
+        parcel.writeString(preparacionReceta)
+        parcel.writeString(profileImageId.toString())
     }
 
     companion object CREATOR : Parcelable.Creator<Receta> {

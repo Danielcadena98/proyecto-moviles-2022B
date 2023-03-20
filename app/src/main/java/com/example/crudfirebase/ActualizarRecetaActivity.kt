@@ -7,49 +7,39 @@ import android.widget.Button
 import android.widget.EditText
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
 class ActualizarRecetaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_receta)
-        var id = intent.getStringExtra("proyectoId")
-        val proyectoNombre = intent.getStringExtra("proyectoNombre")
-        val proyectoDescripcion = intent.getStringExtra("proyectoDescripcion")
-        val proyectoFecha = intent.getStringExtra("proyectoFecha")
+        var id = intent.getStringExtra("recetaId")
+        val recetaNombre = intent.getStringExtra("recetaNombre")
+        val recetaPreparacion = intent.getStringExtra("recetaPreparacion")
 
-        var textNombreProyecto = this.findViewById<EditText>(R.id.tit_nombre_receta)
-        var textDescripcion = this.findViewById<EditText>(R.id.tit_ingredientes)
-        var textFecha = this.findViewById<EditText>(R.id.tit_fecha)
+        var textnombreReceta = this.findViewById<EditText>(R.id.tit_nombre_receta)
+        var textPreparacion = this.findViewById<EditText>(R.id.tit_preparacion)
 
 
-        textNombreProyecto.setText(proyectoNombre)
-        textDescripcion.setText(proyectoDescripcion)
-        textFecha.setText(proyectoFecha)
+        textnombreReceta.setText(recetaNombre)
+        textPreparacion.setText(recetaPreparacion)
 
         val btnSaveData = this.findViewById<Button>(R.id.btn_save)
         btnSaveData.setOnClickListener {
 
 
             if (!checkChanges(
-                    proyectoNombre,
-                    proyectoDescripcion,
-                    proyectoFecha,
-                    textNombreProyecto.text.toString(),
-                    textDescripcion.text.toString(),
-                    textFecha.text.toString()
+                    recetaNombre,
+                    recetaPreparacion,
+                    textnombreReceta.text.toString(),
+                    textPreparacion.text.toString(),
                 )
             ) {
 
-                if (id == null) {
-                    id = Date().time.toString()
-                }
                 saveData(
                     id!!,
-                    textNombreProyecto.text.toString(),
-                    textDescripcion.text.toString(),
-                    textFecha.text.toString()
+                    textnombreReceta.text.toString(),
+                    textPreparacion.text.toString(),
                 )
             }
             irActividad(RecetaListActivity::class.java)
@@ -60,31 +50,27 @@ class ActualizarRecetaActivity : AppCompatActivity() {
 
     private fun saveData(
         id: String,
-        textNombreProyecto: String,
-        textDescripcion: String,
-        textFecha: String
+        textnombreReceta: String,
+        textPreparacion: String,
     ) {
         val db = Firebase.firestore
-        val proyecto = db.collection("proyecto")
+        val receta = db.collection("receta")
 
         val data1 = hashMapOf(
             "id" to id,
-            "nombreProyecto" to textNombreProyecto,
-            "descripcionProyecto" to textDescripcion,
-            "fechaProyecto" to textFecha,
+            "nombreReceta" to textnombreReceta,
+            "preparacionReceta" to textPreparacion,
            )
-        proyecto.document(id).set(data1)
+        receta.document(id).set(data1)
     }
 
     private fun checkChanges(
-        proyectoNombre: String?,
-        proyectoDescripcion: String?,
-        proyectoFecha: String?,
-        textNombreProyecto: String,
-        textDescripcion: String?,
-        textFecha: String
+        recetaNombre: String?,
+        recetaPreparacion: String?,
+        textnombreReceta: String,
+        textPreparacion: String?,
     ): Boolean {
-        return (proyectoNombre == textNombreProyecto && proyectoDescripcion == textDescripcion && proyectoFecha == textFecha)
+        return (recetaNombre == textnombreReceta && recetaPreparacion == textPreparacion)
     }
 
 

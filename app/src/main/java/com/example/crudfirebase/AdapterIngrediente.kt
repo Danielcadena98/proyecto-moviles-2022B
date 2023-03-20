@@ -15,32 +15,32 @@ import com.google.firebase.ktx.Firebase
 class AdapterIngrediente(
     var ingredienteList: ArrayList<Ingrediente>,
     private val contenidoIntentExplicito: ActivityResultLauncher<Intent>,
-    val idProyecto: String
-) : RecyclerView.Adapter<AdapterIngrediente.MyViewHolderTarea>() {
+    val idReceta: String
+) : RecyclerView.Adapter<AdapterIngrediente.MyViewHolderIngrediente>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderTarea {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderIngrediente{
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.ingrediente_item, parent, false)
-        return MyViewHolderTarea(itemView)
+        return MyViewHolderIngrediente(itemView)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolderTarea, position: Int) {
-        val tareaActual = ingredienteList[position]
-        holder.idTarea.text = tareaActual.id
-        holder.nombreTarea.text = tareaActual.tareaNombre
-        holder.descripcionTarea.text = tareaActual.tareaDescripcion
-        holder.terminadaTarea.text = tareaActual.tareaTerminada
-        holder.btnEditarTarea.setOnClickListener {
-            abrirActividadConParametros(ActualizarIngredienteActivity::class.java, tareaActual, it, idProyecto)
+    override fun onBindViewHolder(holder: MyViewHolderIngrediente, position: Int) {
+        val ingredienteActual = ingredienteList[position]
+        holder.idIngrediente.text = ingredienteActual.id
+        holder.nombreIngrediente.text = ingredienteActual.ingredienteNombre
+        holder.descripcionIngrediente.text = ingredienteActual.ingredienteDescripcion
+        holder.conseguidoIngrediente.text = ingredienteActual.ingredienteConseguido
+        holder.btnEditarIngrediente.setOnClickListener {
+            abrirActividadConParametros(ActualizarIngredienteActivity::class.java, ingredienteActual, it, idReceta)
         }
-        holder.btnEditarTarea.setOnClickListener {
+        holder.btnEditarIngrediente.setOnClickListener {
 
             val builder = AlertDialog.Builder(it.context)
             builder.setTitle("Confirmar eliminación")
             builder.setMessage("Estás seguro que lo quieres eliminar?")
             builder.setPositiveButton("Si") { dialog, _ ->
                 dialog.dismiss()
-                deleteTarea(tareaActual.id!!, idProyecto)
-                this.ingredienteList.remove(tareaActual)
+                deleteTarea(ingredienteActual.id!!, idReceta)
+                this.ingredienteList.remove(ingredienteActual)
                 notifyDataSetChanged()
             }
             builder.setNegativeButton("No") { dialog, _ ->
@@ -53,11 +53,11 @@ class AdapterIngrediente(
 
     }
 
-        private fun deleteTarea(id: String, idProyecto: String) {
+        private fun deleteTarea(id: String, idReceta: String) {
         val db = Firebase.firestore
-        val users = db.collection("proyecto")
-        val tareaCollectionsRef = users.document(idProyecto).collection("tarea")
-        tareaCollectionsRef.document(id).delete().addOnSuccessListener {
+        val users = db.collection("receta")
+        val ingredienteCollectionsRef = users.document(idReceta).collection("ingrediente")
+        ingredienteCollectionsRef.document(id).delete().addOnSuccessListener {
 
         }.addOnFailureListener {
 
@@ -71,24 +71,24 @@ class AdapterIngrediente(
         return this.ingredienteList.size
     }
 
-    private fun abrirActividadConParametros(clase: Class<*>, ingrediente: Ingrediente, it: View?, idProyecto: String) {
+    private fun abrirActividadConParametros(clase: Class<*>, ingrediente: Ingrediente, it: View?, idReceta: String) {
         val intent = Intent(it!!.context, clase)
-        intent.putExtra("proeyctoId", ingrediente!!.id)
-        intent.putExtra("tareaNombre", ingrediente!!.tareaNombre)
-        intent.putExtra("proyectoId", idProyecto)
-        intent.putExtra("tareaDescripcion", ingrediente!!.tareaDescripcion)
-        intent.putExtra("tareaTerminada", ingrediente!!.tareaTerminada)
+        intent.putExtra("recetaId", ingrediente!!.id)
+        intent.putExtra("ingredienteNombre", ingrediente!!.ingredienteNombre)
+        intent.putExtra("recetaId", idReceta)
+        intent.putExtra("ingredienteDescripcion", ingrediente!!.ingredienteDescripcion)
+        intent.putExtra("ingredienteConseguido", ingrediente!!.ingredienteConseguido)
         contenidoIntentExplicito.launch(intent)
     }
 
-    class MyViewHolderTarea(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolderIngrediente(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val idTarea = itemView.findViewById<TextView>(R.id.tv_id_ingrediente)
-        val nombreTarea = itemView.findViewById<TextView>(R.id.tv_nombre_ingrediente)
-        val btnEliminarTarea = itemView.findViewById<Button>(R.id.btn_eliminar_ingrediente)
-        val btnEditarTarea = itemView.findViewById<Button>(R.id.btn_editar_ingrediente)
-        val terminadaTarea = itemView.findViewById<TextView>(R.id.tv_conseguido)
-        val descripcionTarea = itemView.findViewById<TextView>(R.id.tv_descripcion_ingrediente)
+        val idIngrediente= itemView.findViewById<TextView>(R.id.tv_id_ingrediente)
+        val nombreIngrediente= itemView.findViewById<TextView>(R.id.tv_nombre_ingrediente)
+        val btnEliminarIngrediente= itemView.findViewById<Button>(R.id.btn_eliminar_ingrediente)
+        val btnEditarIngrediente= itemView.findViewById<Button>(R.id.btn_editar_ingrediente)
+        val conseguidoIngrediente= itemView.findViewById<TextView>(R.id.tv_conseguido)
+        val descripcionIngrediente= itemView.findViewById<TextView>(R.id.tv_descripcion_ingrediente)
     }
 
 
